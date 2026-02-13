@@ -10,9 +10,7 @@ let matchmakingQueue = [];
 module.exports = (io, socket) => {
   console.log("Socket connected:", socket.id);
 
-  // =========================
   // PLAY ONLINE (MATCHMAKING)
-  // =========================
   socket.on("findMatch", () => {
     if (matchmakingQueue.length > 0) {
       const whiteId = matchmakingQueue.shift();
@@ -50,9 +48,9 @@ module.exports = (io, socket) => {
     }
   });
 
-  // =========================
+  
   // FRIEND MODE
-  // =========================
+  
   socket.on("createGame", () => {
     const game = createGame(socket.id);
     game.chess = new Chess();
@@ -85,9 +83,9 @@ module.exports = (io, socket) => {
     });
   });
 
-  // =========================
+  
   // MOVES
-  // =========================
+  
   socket.on("make_move", ({ gameId, from, to }) => {
     const game = getGame(gameId);
     if (!game || game.status !== "ACTIVE") return;
